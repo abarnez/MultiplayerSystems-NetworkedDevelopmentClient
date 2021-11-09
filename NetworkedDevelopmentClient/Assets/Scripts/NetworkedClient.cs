@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class NetworkedClient : MonoBehaviour
 {
+    public Text Message;
     int connectionID;
     int maxConnections = 1000;
     int reliableChannelID;
@@ -19,6 +21,7 @@ public class NetworkedClient : MonoBehaviour
     void Start()
     {
         Connect();
+        Message.text = "Player1: ";
     }
 
     // Update is called once per frame
@@ -102,11 +105,32 @@ public class NetworkedClient : MonoBehaviour
     {
         Debug.Log("msg recieved = " + msg + ".  connection id = " + id);
         string[] csv = msg.Split(',');
-        int signifier = int.Parse(csv[0]);       
+        int signifier = int.Parse(csv[0]);
+        if (signifier == ClientToServerChatSignifiers.GG)
+        {
+            changeChatMsg();
+        }
     }
 
     public void chatMessage()
     {
-        SendMessageToHost("hello host");
+        SendMessageToHost(ClientToServerChatSignifiers.GG + "," + "player is saying gg");
+    }
+
+    public void changeChatMsg()
+    {
+        Message.text = "Player1: " + "GG";
+    }
+
+    public static class ClientToServerChatSignifiers
+    {
+        public const int GG = 1;
+        public const int Rematch = 2;
+    }
+
+    public static class ServerToClientChatSignifiers
+    {
+        public const int GG = 1;
+        public const int Rematch = 2;
     }
 }
