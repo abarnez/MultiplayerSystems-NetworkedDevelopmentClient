@@ -25,6 +25,11 @@ public class NetworkedClient : MonoBehaviour
     void Update()
     {
         UpdateNetworkConnection();
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            chatMessage();
+        }
     }
     private void UpdateNetworkConnection()
     {
@@ -98,5 +103,10 @@ public class NetworkedClient : MonoBehaviour
         Debug.Log("msg recieved = " + msg + ".  connection id = " + id);
         string[] csv = msg.Split(',');
         int signifier = int.Parse(csv[0]);       
+    }
+
+    public void chatMessage()
+    {
+        SendMessageToHost("hello host");
     }
 }
