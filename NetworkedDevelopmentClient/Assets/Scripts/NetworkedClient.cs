@@ -15,10 +15,10 @@ public class NetworkedClient : MonoBehaviour
     int hostID;
     int socketPort = 5491;
     byte error;
-    bool isConnected = false;
+    bool isConnected = false, isTurn;
     int ourClientID;
     public GameObject gameCanvas, gameroomCanvas, observerCanvas;
-    public Toggle ObserverSwitch;
+    public Toggle ObserverSwitch, Pos1, Pos2;
     // Start is called before the first frame update
     void Start()
     {
@@ -155,6 +155,14 @@ public class NetworkedClient : MonoBehaviour
         }
     }
 
+    public void sendPlay()
+    {
+        if (Pos1.isOn && Pos1.interactable)
+        {
+            SendMessageToHost(ServerToClientMoveSignifiers.Pos1 + "," + "player is playing on pos1");
+        }
+    }
+
     public void changeChatMsg()
     {
         Message.text = "Player1: " + "GG";
@@ -205,5 +213,40 @@ public class NetworkedClient : MonoBehaviour
         public const int JoinGame = 1;
         public const int JoinAsObserver = 2;
     }
-    
+
+    public static class ServerToClientMoveSignifiers
+    {
+        public const int Pos1 = 1;
+        public const int Pos2 = 2;
+        public const int Pos3 = 3;
+        public const int Pos4 = 4;
+        public const int Pos5 = 5;
+        public const int Pos6 = 6;
+        public const int Pos7 = 7;
+        public const int Pos8 = 8;
+        public const int Pos9 = 9;       
+    }
+
+    public static class ClientToServerMoveSignifiers
+    {
+        public const int Pos1 = 1;
+        public const int Pos2 = 2;
+        public const int Pos3 = 3;
+        public const int Pos4 = 4;
+        public const int Pos5 = 5;
+        public const int Pos6 = 6;
+        public const int Pos7 = 7;
+        public const int Pos8 = 8;
+        public const int Pos9 = 9;
+    }
+    public static class ServerToClientTurnSignifiers
+    {
+        public const int IsMyTurn = 1;
+        public const int NotMyTurn = 2;
+    }
+    public static class ClientToServerTurnSignifiers
+    {
+        public const int IsMyTurn = 1;
+        public const int NotMyTurn = 2;
+    }
 }
