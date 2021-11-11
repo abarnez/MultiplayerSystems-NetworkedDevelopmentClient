@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class NetworkedClient : MonoBehaviour
 {
-    public Text Message;
+    public Text Message, numPlayers;
     int connectionID;
     int maxConnections = 1000;
     int reliableChannelID;
@@ -17,6 +17,7 @@ public class NetworkedClient : MonoBehaviour
     byte error;
     bool isConnected = false;
     int ourClientID;
+    public GameObject gameCanvas, gameroomCanvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -110,6 +111,10 @@ public class NetworkedClient : MonoBehaviour
         {
             changeChatMsg();
         }
+        if (signifier == ServerToClientGameSignifiers.JoinGame)
+        {
+            changeChatMsg();
+        }
     }
 
     public void chatMessage()
@@ -119,12 +124,17 @@ public class NetworkedClient : MonoBehaviour
 
     public void joinGameRequest()
     {
-        SendMessageToHost(ClientToServerChatSignifiers.GG + "," + "player is saying gg");
+        SendMessageToHost(ClientToServerGameSignifiers.JoinGame + "," + "player is trying to join game room");
     }
 
     public void changeChatMsg()
     {
         Message.text = "Player1: " + "GG";
+    }
+    public void JoinRoom()
+    {
+        gameroomCanvas.SetActive(false);
+        gameCanvas.SetActive(true);
     }
 
     public static class ClientToServerChatSignifiers
@@ -145,9 +155,11 @@ public class NetworkedClient : MonoBehaviour
         public const int JoinAsObserver = 2;
     }
 
+    
     public static class ServerToClientGameSignifiers
     {
         public const int JoinGame = 1;
         public const int JoinAsObserver = 2;
     }
+    
 }
