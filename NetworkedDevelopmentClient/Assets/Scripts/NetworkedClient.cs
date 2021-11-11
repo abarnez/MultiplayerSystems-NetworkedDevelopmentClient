@@ -117,6 +117,11 @@ public class NetworkedClient : MonoBehaviour
         SendMessageToHost(ClientToServerChatSignifiers.GG + "," + "player is saying gg");
     }
 
+    public void joinGameRequest()
+    {
+        SendMessageToHost(ClientToServerChatSignifiers.GG + "," + "player is saying gg");
+    }
+
     public void changeChatMsg()
     {
         Message.text = "Player1: " + "GG";
@@ -132,5 +137,17 @@ public class NetworkedClient : MonoBehaviour
     {
         public const int GG = 1;
         public const int Rematch = 2;
+    }
+
+    public static class ClientToServerGameSignifiers
+    {
+        public const int JoinGame = 1;
+        public const int JoinAsObserver = 2;
+    }
+
+    public static class ServerToClientGameSignifiers
+    {
+        public const int JoinGame = 1;
+        public const int JoinAsObserver = 2;
     }
 }
