@@ -17,7 +17,7 @@ public class NetworkedClient : MonoBehaviour
     byte error;
     bool isConnected = false;
     int ourClientID;
-    public GameObject gameCanvas, gameroomCanvas;
+    public GameObject gameCanvas, gameroomCanvas, observerCanvas;
     public Toggle ObserverSwitch;
     // Start is called before the first frame update
     void Start()
@@ -124,6 +124,10 @@ public class NetworkedClient : MonoBehaviour
         {
             JoinRoom();
         }
+        if (signifier == ServerToClientGameSignifiers.JoinAsObserver)
+        {
+            JoinRoomObserver();
+        }
     }
 
     public void chatMessage()
@@ -167,6 +171,12 @@ public class NetworkedClient : MonoBehaviour
     {
         gameroomCanvas.SetActive(false);
         gameCanvas.SetActive(true);
+    }
+
+    public void JoinRoomObserver()
+    {
+        gameroomCanvas.SetActive(false);
+        observerCanvas.SetActive(true);
     }
 
     public static class ClientToServerChatSignifiers
