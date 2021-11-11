@@ -111,6 +111,14 @@ public class NetworkedClient : MonoBehaviour
         {
             changeChatMsg();
         }
+        if (signifier == ClientToServerChatSignifiers.Rematch)
+        {
+            changeChatMsg1();
+        }
+        if (signifier == ClientToServerChatSignifiers.EZCLap)
+        {
+            changeChatMsg2();
+        }
         if (signifier == ServerToClientGameSignifiers.JoinGame)
         {
             changeChatMsg();
@@ -120,6 +128,14 @@ public class NetworkedClient : MonoBehaviour
     public void chatMessage()
     {
         SendMessageToHost(ClientToServerChatSignifiers.GG + "," + "player is saying gg");
+    }
+    public void chatMessage1()
+    {
+        SendMessageToHost(ClientToServerChatSignifiers.Rematch + "," + "player is saying rematch");
+    }
+    public void chatMessage2()
+    {
+        SendMessageToHost(ClientToServerChatSignifiers.EZCLap + "," + "player is saying ezclap");
     }
 
     public void joinGameRequest()
@@ -131,6 +147,14 @@ public class NetworkedClient : MonoBehaviour
     {
         Message.text = "Player1: " + "GG";
     }
+    public void changeChatMsg1()
+    {
+        Message.text = "Player1: " + "Rematch?";
+    }
+    public void changeChatMsg2()
+    {
+        Message.text = "Player1: " + "EZClap";
+    }
     public void JoinRoom()
     {
         gameroomCanvas.SetActive(false);
@@ -141,12 +165,14 @@ public class NetworkedClient : MonoBehaviour
     {
         public const int GG = 1;
         public const int Rematch = 2;
+        public const int EZCLap = 3;
     }
 
     public static class ServerToClientChatSignifiers
     {
         public const int GG = 1;
         public const int Rematch = 2;
+        public const int EZCLap = 3;
     }
 
     public static class ClientToServerGameSignifiers
