@@ -18,6 +18,7 @@ public class NetworkedClient : MonoBehaviour
     bool isConnected = false;
     int ourClientID;
     public GameObject gameCanvas, gameroomCanvas;
+    public Toggle ObserverSwitch;
     // Start is called before the first frame update
     void Start()
     {
@@ -121,7 +122,7 @@ public class NetworkedClient : MonoBehaviour
         }
         if (signifier == ServerToClientGameSignifiers.JoinGame)
         {
-            changeChatMsg();
+            JoinRoom();
         }
     }
 
@@ -140,7 +141,14 @@ public class NetworkedClient : MonoBehaviour
 
     public void joinGameRequest()
     {
-        SendMessageToHost(ClientToServerGameSignifiers.JoinGame + "," + "player is trying to join game room");
+        if (ObserverSwitch.isOn)
+        {
+            SendMessageToHost(ClientToServerGameSignifiers.JoinAsObserver + "," + "player is trying to join game room");
+        }
+        else
+        {
+            SendMessageToHost(ClientToServerGameSignifiers.JoinGame + "," + "player is trying to join game room");
+        }
     }
 
     public void changeChatMsg()
