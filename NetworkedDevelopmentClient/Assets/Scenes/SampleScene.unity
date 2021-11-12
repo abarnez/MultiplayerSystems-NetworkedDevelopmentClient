@@ -1296,7 +1296,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &416003803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,7 +1504,14 @@ MonoBehaviour:
   playButton: {fileID: 1014411857}
   ObserverSwitch: {fileID: 18702308}
   Pos1: {fileID: 699226258}
-  Pos2: {fileID: 0}
+  Pos2: {fileID: 1613754704}
+  Pos3: {fileID: 1925424050}
+  Pos4: {fileID: 992103665}
+  Pos5: {fileID: 1815552082}
+  Pos6: {fileID: 1462003803}
+  Pos7: {fileID: 1734090305}
+  Pos8: {fileID: 1176283606}
+  Pos9: {fileID: 389957247}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -2070,7 +2077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &800989226
 MonoBehaviour:
   m_ObjectHideFlags: 0
