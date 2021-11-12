@@ -1498,6 +1498,7 @@ MonoBehaviour:
   Message: {fileID: 1086395653}
   numPlayers: {fileID: 0}
   isTurn: 0
+  P1: 0
   gameCanvas: {fileID: 800989225}
   gameroomCanvas: {fileID: 585648669}
   observerCanvas: {fileID: 957867527}
@@ -1512,6 +1513,17 @@ MonoBehaviour:
   Pos7: {fileID: 1734090305}
   Pos8: {fileID: 1176283606}
   Pos9: {fileID: 389957247}
+  pos1Image: {fileID: 375045660}
+  pos2Image: {fileID: 1000083990}
+  pos3Image: {fileID: 1787560559}
+  pos4Image: {fileID: 240845123}
+  pos5Image: {fileID: 44424750}
+  pos6Image: {fileID: 1317199173}
+  pos7Image: {fileID: 1727739862}
+  pos8Image: {fileID: 281681461}
+  pos9Image: {fileID: 809186025}
+  circle: {fileID: 21300000, guid: 3b166630ab598d6408c1274fe376f942, type: 3}
+  X: {fileID: 21300000, guid: aa98a84cf2acf38408113c3f5de4ecb6, type: 3}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

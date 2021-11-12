@@ -15,21 +15,29 @@ public class NetworkedClient : MonoBehaviour
     int hostID;
     int socketPort = 5491;
     byte error;
-    public bool isTurn;
+    public bool isTurn, P1;
     bool isConnected = false;
     int ourClientID;
     public GameObject gameCanvas, gameroomCanvas, observerCanvas, playButton;
     public Toggle ObserverSwitch, Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9;
+    public Image pos1Image, pos2Image, pos3Image, pos4Image, pos5Image, pos6Image, pos7Image, pos8Image, pos9Image;
+    public Sprite circle, X;
+
     // Start is called before the first frame update
     void Start()
     {
         Connect();
         Message.text = "Player1: ";
+        if(connectionID == 1)
+        {
+            P1 = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         UpdateNetworkConnection();
 
         if (isTurn)
@@ -180,13 +188,60 @@ public class NetworkedClient : MonoBehaviour
             pos9update();
             Debug.Log("sig recieve");
         }
+        if (signifier == ServerToClientMoveSignifiers2.Pos1)
+        {
+            pos1update2();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers2.Pos2)
+        {
+            pos2update2();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers2.Pos3)
+        {
+            pos3update2();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers2.Pos4)
+        {
+            pos4update2();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers2.Pos5)
+        {
+            pos5update2();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers2.Pos6)
+        {
+            pos6update2();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers2.Pos7)
+        {
+            pos7update2();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers2.Pos8)
+        {
+            pos8update2();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers2.Pos9)
+        {
+            pos9update2();
+            Debug.Log("sig recieve");
+        }
         if (signifier == ServerToClientTurnSignifiers.IsMyTurn)
         {
             isTurn = true;
+        
         }
         if (signifier == ServerToClientTurnSignifiers.NotMyTurn)
         {
             isTurn = false;
+  
         }
     }
 
@@ -280,19 +335,33 @@ public class NetworkedClient : MonoBehaviour
     {
         gameroomCanvas.SetActive(false);
         gameCanvas.SetActive(true);
+        if (!P1)
+        {
+            pos1Image.sprite = X;
+            pos2Image.sprite = X;
+            pos3Image.sprite = X;
+            pos4Image.sprite = X;
+            pos5Image.sprite = X;
+            pos6Image.sprite = X;
+            pos7Image.sprite = X;
+            pos8Image.sprite = X;
+            pos9Image.sprite = X;
+
+        }
     }
 
     public void JoinRoomObserver()
     {
         gameroomCanvas.SetActive(false);
         observerCanvas.SetActive(true);
+      
     }
 
     public void pos1update()
     {
         Pos1.group = null;
         Pos1.isOn = true;
-        Pos1.interactable = false;
+        Pos1.interactable = false;      
     }
     public void pos2update()
     {
@@ -347,6 +416,77 @@ public class NetworkedClient : MonoBehaviour
         Pos9.group = null;
         Pos9.isOn = true;
         Pos9.interactable = false;
+    }
+
+    public void pos1update2()
+    {
+        Pos1.group = null;
+        Pos1.isOn = true;
+        Pos1.interactable = false;
+        pos1Image.sprite = X;
+
+    }
+    public void pos2update2()
+    {
+        Pos2.group = null;
+        Pos2.isOn = true;
+        Pos2.interactable = false;
+        pos2Image.sprite = X;
+    }
+
+    public void pos3update2()
+    {
+        Pos3.group = null;
+        Pos3.isOn = true;
+        Pos3.interactable = false;
+        pos3Image.sprite = X;
+    }
+
+    public void pos4update2()
+    {
+        Pos4.group = null;
+        Pos4.isOn = true;
+        Pos4.interactable = false;
+        pos4Image.sprite = X;
+    }
+    public void pos5update2()
+    {
+        Pos5.group = null;
+        Pos5.isOn = true;
+        Pos5.interactable = false;
+        pos5Image.sprite = X;
+    }
+
+    public void pos6update2()
+    {
+        Pos6.group = null;
+        Pos6.isOn = true;
+        Pos6.interactable = false;
+        pos6Image.sprite = X;
+    }
+
+    public void pos7update2()
+    {
+        Pos7.group = null;
+        Pos7.isOn = true;
+        Pos7.interactable = false;
+        pos7Image.sprite = X;
+    }
+
+    public void pos8update2()
+    {
+        Pos8.group = null;
+        Pos8.isOn = true;
+        Pos8.interactable = false;
+        pos8Image.sprite = X;
+    }
+
+    public void pos9update2()
+    {
+        Pos9.group = null;
+        Pos9.isOn = true;
+        Pos9.interactable = false;
+        pos9Image.sprite = X;
     }
 
     public static class ClientToServerChatSignifiers
@@ -410,5 +550,31 @@ public class NetworkedClient : MonoBehaviour
     {
         public const int IsMyTurn = 20;
         public const int NotMyTurn = 21;
+    }
+
+    public static class ServerToClientMoveSignifiers2
+    {
+        public const int Pos1 = 22;
+        public const int Pos2 = 23;
+        public const int Pos3 = 24;
+        public const int Pos4 = 25;
+        public const int Pos5 = 26;
+        public const int Pos6 = 27;
+        public const int Pos7 = 28;
+        public const int Pos8 = 29;
+        public const int Pos9 = 30;
+    }
+
+    public static class ClientToServerMoveSignifiers2
+    {
+        public const int Pos1 = 22;
+        public const int Pos2 = 23;
+        public const int Pos3 = 24;
+        public const int Pos4 = 25;
+        public const int Pos5 = 26;
+        public const int Pos6 = 27;
+        public const int Pos7 = 28;
+        public const int Pos8 = 29;
+        public const int Pos9 = 30;
     }
 }
