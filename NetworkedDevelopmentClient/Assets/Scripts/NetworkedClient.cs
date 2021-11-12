@@ -19,7 +19,7 @@ public class NetworkedClient : MonoBehaviour
     bool isConnected = false;
     int ourClientID;
     public GameObject gameCanvas, gameroomCanvas, observerCanvas, playButton;
-    public Toggle ObserverSwitch, Pos1, Pos2;
+    public Toggle ObserverSwitch, Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9;
     // Start is called before the first frame update
     void Start()
     {
@@ -140,6 +140,46 @@ public class NetworkedClient : MonoBehaviour
             pos1update();
             Debug.Log("sig recieve");
         }
+        if (signifier == ServerToClientMoveSignifiers.Pos2)
+        {
+            pos2update();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers.Pos3)
+        {
+            pos3update();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers.Pos4)
+        {
+            pos4update();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers.Pos5)
+        {
+            pos5update();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers.Pos6)
+        {
+            pos6update();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers.Pos7)
+        {
+            pos7update();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers.Pos8)
+        {
+            pos8update();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientMoveSignifiers.Pos9)
+        {
+            pos9update();
+            Debug.Log("sig recieve");
+        }
         if (signifier == ServerToClientTurnSignifiers.IsMyTurn)
         {
             isTurn = true;
@@ -182,6 +222,46 @@ public class NetworkedClient : MonoBehaviour
             SendMessageToHost(ClientToServerMoveSignifiers.Pos1 + "," + "player is playing on pos1");
             Debug.Log("Sig Sent");
         }
+        if (Pos2.isOn && Pos2.interactable)
+        {
+            SendMessageToHost(ClientToServerMoveSignifiers.Pos2 + "," + "player is playing on pos1");
+            Debug.Log("Sig Sent");
+        }
+        if (Pos3.isOn && Pos3.interactable)
+        {
+            SendMessageToHost(ClientToServerMoveSignifiers.Pos3 + "," + "player is playing on pos1");
+            Debug.Log("Sig Sent");
+        }
+        if (Pos4.isOn && Pos4.interactable)
+        {
+            SendMessageToHost(ClientToServerMoveSignifiers.Pos4 + "," + "player is playing on pos1");
+            Debug.Log("Sig Sent");
+        }
+        if (Pos5.isOn && Pos5.interactable)
+        {
+            SendMessageToHost(ClientToServerMoveSignifiers.Pos5 + "," + "player is playing on pos1");
+            Debug.Log("Sig Sent");
+        }
+        if (Pos6.isOn && Pos6.interactable)
+        {
+            SendMessageToHost(ClientToServerMoveSignifiers.Pos6 + "," + "player is playing on pos1");
+            Debug.Log("Sig Sent");
+        }
+        if (Pos7.isOn && Pos7.interactable)
+        {
+            SendMessageToHost(ClientToServerMoveSignifiers.Pos7 + "," + "player is playing on pos1");
+            Debug.Log("Sig Sent");
+        }
+        if (Pos8.isOn && Pos8.interactable)
+        {
+            SendMessageToHost(ClientToServerMoveSignifiers.Pos8 + "," + "player is playing on pos1");
+            Debug.Log("Sig Sent");
+        }
+        if (Pos9.isOn && Pos9.interactable)
+        {
+            SendMessageToHost(ClientToServerMoveSignifiers.Pos9 + "," + "player is playing on pos1");
+            Debug.Log("Sig Sent");
+        }
     }
 
     public void changeChatMsg()
@@ -213,6 +293,60 @@ public class NetworkedClient : MonoBehaviour
         Pos1.group = null;
         Pos1.isOn = true;
         Pos1.interactable = false;
+    }
+    public void pos2update()
+    {
+        Pos2.group = null;
+        Pos2.isOn = true;
+        Pos2.interactable = false;
+    }
+
+    public void pos3update()
+    {
+        Pos3.group = null;
+        Pos3.isOn = true;
+        Pos3.interactable = false;
+    }
+
+    public void pos4update()
+    {
+        Pos4.group = null;
+        Pos4.isOn = true;
+        Pos4.interactable = false;
+    }
+    public void pos5update()
+    {
+        Pos5.group = null;
+        Pos5.isOn = true;
+        Pos5.interactable = false;
+    }
+
+    public void pos6update()
+    {
+        Pos6.group = null;
+        Pos6.isOn = true;
+        Pos6.interactable = false;
+    }
+
+    public void pos7update()
+    {
+        Pos7.group = null;
+        Pos7.isOn = true;
+        Pos7.interactable = false;
+    }
+
+    public void pos8update()
+    {
+        Pos8.group = null;
+        Pos8.isOn = true;
+        Pos8.interactable = false;
+    }
+
+    public void pos9update()
+    {
+        Pos9.group = null;
+        Pos9.isOn = true;
+        Pos9.interactable = false;
     }
 
     public static class ClientToServerChatSignifiers
