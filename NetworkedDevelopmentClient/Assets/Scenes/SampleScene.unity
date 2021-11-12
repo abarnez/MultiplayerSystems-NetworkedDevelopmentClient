@@ -1112,11 +1112,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Message: {fileID: 1086395653}
   numPlayers: {fileID: 0}
+  isTurn: 0
   gameCanvas: {fileID: 800989225}
   gameroomCanvas: {fileID: 585648669}
   observerCanvas: {fileID: 957867527}
+  playButton: {fileID: 1014411857}
   ObserverSwitch: {fileID: 18702308}
-  Pos1: {fileID: 0}
+  Pos1: {fileID: 699226258}
   Pos2: {fileID: 0}
 --- !u!20 &519420031
 Camera:
@@ -1607,7 +1609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &800989226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2256,7 +2258,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1014411860}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 519420030}
+        m_TargetAssemblyTypeName: NetworkedClient, Assembly-CSharp
+        m_MethodName: sendPlay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1014411860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3689,7 +3703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowSwitchOff: 0
+  m_AllowSwitchOff: 1
 --- !u!1 &1910782958
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,9 +15,10 @@ public class NetworkedClient : MonoBehaviour
     int hostID;
     int socketPort = 5491;
     byte error;
-    bool isConnected = false, isTurn;
+    public bool isTurn;
+    bool isConnected = false;
     int ourClientID;
-    public GameObject gameCanvas, gameroomCanvas, observerCanvas;
+    public GameObject gameCanvas, gameroomCanvas, observerCanvas, playButton;
     public Toggle ObserverSwitch, Pos1, Pos2;
     // Start is called before the first frame update
     void Start()
@@ -31,10 +32,15 @@ public class NetworkedClient : MonoBehaviour
     {
         UpdateNetworkConnection();
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (isTurn)
         {
-            chatMessage();
+            playButton.SetActive(true);
         }
+        else
+        {
+            playButton.SetActive(false);
+        }
+
     }
     private void UpdateNetworkConnection()
     {
@@ -108,25 +114,39 @@ public class NetworkedClient : MonoBehaviour
         Debug.Log("msg recieved = " + msg + ".  connection id = " + id);
         string[] csv = msg.Split(',');
         int signifier = int.Parse(csv[0]);
-        if (signifier == ClientToServerChatSignifiers.GG)
+        if (signifier == ServerToClientChatSignifiers.GG)
         {
             changeChatMsg();
         }
-        if (signifier == ClientToServerChatSignifiers.Rematch)
+        if (signifier == ServerToClientChatSignifiers.Rematch)
         {
             changeChatMsg1();
         }
-        if (signifier == ClientToServerChatSignifiers.EZCLap)
+        if (signifier == ServerToClientChatSignifiers.EZCLap)
         {
             changeChatMsg2();
         }
         if (signifier == ServerToClientGameSignifiers.JoinGame)
         {
             JoinRoom();
+
         }
         if (signifier == ServerToClientGameSignifiers.JoinAsObserver)
         {
             JoinRoomObserver();
+        }
+        if (signifier == ServerToClientMoveSignifiers.Pos1)
+        {
+            pos1update();
+            Debug.Log("sig recieve");
+        }
+        if (signifier == ServerToClientTurnSignifiers.IsMyTurn)
+        {
+            isTurn = true;
+        }
+        if (signifier == ServerToClientTurnSignifiers.NotMyTurn)
+        {
+            isTurn = false;
         }
     }
 
@@ -159,7 +179,8 @@ public class NetworkedClient : MonoBehaviour
     {
         if (Pos1.isOn && Pos1.interactable)
         {
-            SendMessageToHost(ServerToClientMoveSignifiers.Pos1 + "," + "player is playing on pos1");
+            SendMessageToHost(ClientToServerMoveSignifiers.Pos1 + "," + "player is playing on pos1");
+            Debug.Log("Sig Sent");
         }
     }
 
@@ -187,6 +208,13 @@ public class NetworkedClient : MonoBehaviour
         observerCanvas.SetActive(true);
     }
 
+    public void pos1update()
+    {
+        Pos1.group = null;
+        Pos1.isOn = true;
+        Pos1.interactable = false;
+    }
+
     public static class ClientToServerChatSignifiers
     {
         public const int GG = 1;
@@ -203,50 +231,50 @@ public class NetworkedClient : MonoBehaviour
 
     public static class ClientToServerGameSignifiers
     {
-        public const int JoinGame = 1;
-        public const int JoinAsObserver = 2;
+        public const int JoinGame = 4;
+        public const int JoinAsObserver = 5;
     }
 
     
     public static class ServerToClientGameSignifiers
     {
-        public const int JoinGame = 1;
-        public const int JoinAsObserver = 2;
+        public const int JoinGame = 4;
+        public const int JoinAsObserver = 5;
     }
 
     public static class ServerToClientMoveSignifiers
     {
-        public const int Pos1 = 1;
-        public const int Pos2 = 2;
-        public const int Pos3 = 3;
-        public const int Pos4 = 4;
-        public const int Pos5 = 5;
-        public const int Pos6 = 6;
-        public const int Pos7 = 7;
-        public const int Pos8 = 8;
-        public const int Pos9 = 9;       
+        public const int Pos1 = 11;
+        public const int Pos2 = 12;
+        public const int Pos3 = 13;
+        public const int Pos4 = 14;
+        public const int Pos5 = 15;
+        public const int Pos6 = 16;
+        public const int Pos7 = 17;
+        public const int Pos8 = 18;
+        public const int Pos9 = 19;       
     }
 
     public static class ClientToServerMoveSignifiers
     {
-        public const int Pos1 = 1;
-        public const int Pos2 = 2;
-        public const int Pos3 = 3;
-        public const int Pos4 = 4;
-        public const int Pos5 = 5;
-        public const int Pos6 = 6;
-        public const int Pos7 = 7;
-        public const int Pos8 = 8;
-        public const int Pos9 = 9;
+        public const int Pos1 = 11;
+        public const int Pos2 = 12;
+        public const int Pos3 = 13;
+        public const int Pos4 = 14;
+        public const int Pos5 = 15;
+        public const int Pos6 = 16;
+        public const int Pos7 = 17;
+        public const int Pos8 = 18;
+        public const int Pos9 = 19;
     }
     public static class ServerToClientTurnSignifiers
     {
-        public const int IsMyTurn = 1;
-        public const int NotMyTurn = 2;
+        public const int IsMyTurn = 20;
+        public const int NotMyTurn = 21;
     }
     public static class ClientToServerTurnSignifiers
     {
-        public const int IsMyTurn = 1;
-        public const int NotMyTurn = 2;
+        public const int IsMyTurn = 20;
+        public const int NotMyTurn = 21;
     }
 }
