@@ -28,16 +28,15 @@ public class NetworkedClient : MonoBehaviour
     {
         Connect();
         Message.text = "Player1: ";
-        if(connectionID == 1)
-        {
-            P1 = true;
-        }
+        P1 = false;
+              
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+ 
+
         UpdateNetworkConnection();
 
         if (isTurn)
@@ -136,8 +135,7 @@ public class NetworkedClient : MonoBehaviour
         }
         if (signifier == ServerToClientGameSignifiers.JoinGame)
         {
-            JoinRoom();
-
+            JoinRoom();        
         }
         if (signifier == ServerToClientGameSignifiers.JoinAsObserver)
         {
@@ -240,8 +238,63 @@ public class NetworkedClient : MonoBehaviour
         }
         if (signifier == ServerToClientTurnSignifiers.NotMyTurn)
         {
-            isTurn = false;
-  
+            isTurn = false; 
+        }
+        if (signifier == ServerToClientXSignifiers.X)
+        {
+            P1 = true;
+            if (P1)
+            {
+                pos1Image.sprite = circle;
+                pos2Image.sprite = circle;
+                pos3Image.sprite = circle;
+                pos4Image.sprite = circle;
+                pos5Image.sprite = circle;
+                pos6Image.sprite = circle;
+                pos7Image.sprite = circle;
+                pos8Image.sprite = circle;
+                pos9Image.sprite = circle;
+            }
+            if (!P1)
+            {
+                pos1Image.sprite = X;
+                pos2Image.sprite = X;
+                pos3Image.sprite = X;
+                pos4Image.sprite = X;
+                pos5Image.sprite = X;
+                pos6Image.sprite = X;
+                pos7Image.sprite = X;
+                pos8Image.sprite = X;
+                pos9Image.sprite = X;
+            }
+        }
+        if (signifier == ServerToClientXSignifiers.O)
+        {
+            P1 = false;
+            if (P1)
+            {
+                pos1Image.sprite = circle;
+                pos2Image.sprite = circle;
+                pos3Image.sprite = circle;
+                pos4Image.sprite = circle;
+                pos5Image.sprite = circle;
+                pos6Image.sprite = circle;
+                pos7Image.sprite = circle;
+                pos8Image.sprite = circle;
+                pos9Image.sprite = circle;
+            }
+            if (!P1)
+            {
+                pos1Image.sprite = X;
+                pos2Image.sprite = X;
+                pos3Image.sprite = X;
+                pos4Image.sprite = X;
+                pos5Image.sprite = X;
+                pos6Image.sprite = X;
+                pos7Image.sprite = X;
+                pos8Image.sprite = X;
+                pos9Image.sprite = X;
+            }
         }
     }
 
@@ -334,20 +387,7 @@ public class NetworkedClient : MonoBehaviour
     public void JoinRoom()
     {
         gameroomCanvas.SetActive(false);
-        gameCanvas.SetActive(true);
-        if (!P1)
-        {
-            pos1Image.sprite = X;
-            pos2Image.sprite = X;
-            pos3Image.sprite = X;
-            pos4Image.sprite = X;
-            pos5Image.sprite = X;
-            pos6Image.sprite = X;
-            pos7Image.sprite = X;
-            pos8Image.sprite = X;
-            pos9Image.sprite = X;
-
-        }
+        gameCanvas.SetActive(true);                     
     }
 
     public void JoinRoomObserver()
@@ -361,13 +401,15 @@ public class NetworkedClient : MonoBehaviour
     {
         Pos1.group = null;
         Pos1.isOn = true;
-        Pos1.interactable = false;      
+        Pos1.interactable = false;
+        pos1Image.sprite = circle;
     }
     public void pos2update()
     {
         Pos2.group = null;
         Pos2.isOn = true;
         Pos2.interactable = false;
+        pos2Image.sprite = circle;
     }
 
     public void pos3update()
@@ -375,6 +417,7 @@ public class NetworkedClient : MonoBehaviour
         Pos3.group = null;
         Pos3.isOn = true;
         Pos3.interactable = false;
+        pos3Image.sprite = circle;
     }
 
     public void pos4update()
@@ -382,12 +425,14 @@ public class NetworkedClient : MonoBehaviour
         Pos4.group = null;
         Pos4.isOn = true;
         Pos4.interactable = false;
+        pos4Image.sprite = circle;
     }
     public void pos5update()
     {
         Pos5.group = null;
         Pos5.isOn = true;
         Pos5.interactable = false;
+        pos5Image.sprite = circle;
     }
 
     public void pos6update()
@@ -395,6 +440,7 @@ public class NetworkedClient : MonoBehaviour
         Pos6.group = null;
         Pos6.isOn = true;
         Pos6.interactable = false;
+        pos6Image.sprite = circle;
     }
 
     public void pos7update()
@@ -402,6 +448,7 @@ public class NetworkedClient : MonoBehaviour
         Pos7.group = null;
         Pos7.isOn = true;
         Pos7.interactable = false;
+        pos7Image.sprite = circle;
     }
 
     public void pos8update()
@@ -409,6 +456,7 @@ public class NetworkedClient : MonoBehaviour
         Pos8.group = null;
         Pos8.isOn = true;
         Pos8.interactable = false;
+        pos8Image.sprite = circle;
     }
 
     public void pos9update()
@@ -416,6 +464,7 @@ public class NetworkedClient : MonoBehaviour
         Pos9.group = null;
         Pos9.isOn = true;
         Pos9.interactable = false;
+        pos9Image.sprite = circle;
     }
 
     public void pos1update2()
@@ -576,5 +625,16 @@ public class NetworkedClient : MonoBehaviour
         public const int Pos7 = 28;
         public const int Pos8 = 29;
         public const int Pos9 = 30;
+    }
+
+    public static class ClientToServerXSignifiers
+    {
+        public const int X = 31;
+        public const int O = 32;
+    }
+    public static class ServerToClientXSignifiers
+    {
+        public const int X = 31;
+        public const int O = 32;
     }
 }
