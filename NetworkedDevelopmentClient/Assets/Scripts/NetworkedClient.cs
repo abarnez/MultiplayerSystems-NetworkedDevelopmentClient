@@ -305,6 +305,7 @@ public class NetworkedClient : MonoBehaviour
                 pos9Image.sprite = X;
             }
         }
+
         if (signifier == ClientToServerGOSignifiers.p1Won)
         {
             GameOver = true;
