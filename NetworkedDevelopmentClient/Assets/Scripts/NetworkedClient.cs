@@ -556,6 +556,19 @@ public class NetworkedClient : MonoBehaviour
         pos9Image.sprite = X;
     }
 
+    public void clearBoard()
+    {
+        Pos1.isOn = false;
+        Pos2.isOn = false;
+        Pos3.isOn = false;
+        Pos4.isOn = false;
+        Pos5.isOn = false;
+        Pos6.isOn = false;
+        Pos7.isOn = false;
+        Pos8.isOn = false;
+        Pos9.isOn = false;
+    }
+
     public static class ClientToServerChatSignifiers
     {
         public const int GG = 1;
@@ -664,5 +677,14 @@ public class NetworkedClient : MonoBehaviour
     {
         public const int p1Won = 33;
         public const int p2Won = 34;
+    }
+
+    public static class ClientToServerRPSignifiers
+    {
+        public const int Replay = 35;
+    }
+    public static class ServerToClientRPSignifiers
+    {
+        public const int Replay = 35;
     }
 }
