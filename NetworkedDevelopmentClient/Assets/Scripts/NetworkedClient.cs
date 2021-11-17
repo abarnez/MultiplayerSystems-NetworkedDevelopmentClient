@@ -305,7 +305,6 @@ public class NetworkedClient : MonoBehaviour
                 pos9Image.sprite = X;
             }
         }
-
         if (signifier == ClientToServerGOSignifiers.p1Won)
         {
             GameOver = true;
@@ -314,8 +313,15 @@ public class NetworkedClient : MonoBehaviour
         {
             GameOver = true;
         }
+        if (signifier == ServerToClientRPSignifiers.Replay)
+        {
+            clearBoard();
+        }
     }
-
+    public void ReplayRequest()
+    {
+        SendMessageToHost(ClientToServerRPSignifiers.Replay + "," + "");
+    }
     public void chatMessage()
     {
         SendMessageToHost(ClientToServerChatSignifiers.GG + "," + "player is saying gg");
