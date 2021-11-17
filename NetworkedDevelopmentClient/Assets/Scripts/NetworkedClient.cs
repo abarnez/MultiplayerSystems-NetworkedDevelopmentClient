@@ -15,10 +15,10 @@ public class NetworkedClient : MonoBehaviour
     int hostID;
     int socketPort = 5491;
     byte error;
-    public bool isTurn, P1;
+    public bool isTurn, P1, GameOver;
     bool isConnected = false;
     int ourClientID;
-    public GameObject gameCanvas, gameroomCanvas, observerCanvas, playButton;
+    public GameObject gameCanvas, gameroomCanvas, observerCanvas, playButton, replayButton;
     public Toggle ObserverSwitch, Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9;
     public Image pos1Image, pos2Image, pos3Image, pos4Image, pos5Image, pos6Image, pos7Image, pos8Image, pos9Image;
     public Sprite circle, X;
@@ -41,11 +41,20 @@ public class NetworkedClient : MonoBehaviour
 
         if (isTurn)
         {
+            if(!GameOver)
             playButton.SetActive(true);
         }
         else
         {
             playButton.SetActive(false);
+        }
+        if (GameOver)
+        {
+            replayButton.SetActive(true);
+        } 
+        else
+        {
+            replayButton.SetActive(false);
         }
 
     }
@@ -295,6 +304,14 @@ public class NetworkedClient : MonoBehaviour
                 pos8Image.sprite = X;
                 pos9Image.sprite = X;
             }
+        }
+        if (signifier == ClientToServerGOSignifiers.p1Won)
+        {
+            GameOver = true;
+        }
+        if (signifier == ClientToServerGOSignifiers.p2Won)
+        {
+            GameOver = true;
         }
     }
 
@@ -636,5 +653,15 @@ public class NetworkedClient : MonoBehaviour
     {
         public const int X = 31;
         public const int O = 32;
+    }
+    public static class ClientToServerGOSignifiers
+    {
+        public const int p1Won = 33;
+        public const int p2Won = 34;
+    }
+    public static class ServerToClientGOSignifiers
+    {
+        public const int p1Won = 33;
+        public const int p2Won = 34;
     }
 }
