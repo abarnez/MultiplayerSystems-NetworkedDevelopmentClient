@@ -18,7 +18,7 @@ public class NetworkedClient : MonoBehaviour
     public bool isTurn, P1, GameOver;
     bool isConnected = false;
     int ourClientID;
-    public GameObject gameCanvas, gameroomCanvas, observerCanvas, playButton, replayButton;
+    public GameObject gameCanvas, gameroomCanvas, observerCanvas, playButton, replayButton, observerText;
     public Toggle ObserverSwitch, Pos1, Pos2, Pos3, Pos4, Pos5, Pos6, Pos7, Pos8, Pos9;
     public Image pos1Image, pos2Image, pos3Image, pos4Image, pos5Image, pos6Image, pos7Image, pos8Image, pos9Image;
     public Sprite circle, X;
@@ -149,6 +149,7 @@ public class NetworkedClient : MonoBehaviour
         if (signifier == ServerToClientGameSignifiers.JoinAsObserver)
         {
             JoinRoomObserver();
+
         }
         if (signifier == ServerToClientMoveSignifiers.Pos1)
         {
@@ -417,8 +418,9 @@ public class NetworkedClient : MonoBehaviour
     public void JoinRoomObserver()
     {
         gameroomCanvas.SetActive(false);
-        observerCanvas.SetActive(true);
-      
+        gameCanvas.SetActive(true);
+        playButton.SetActive(false);
+        observerText.SetActive(true);
     }
 
     public void pos1update()
