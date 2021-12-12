@@ -79,7 +79,6 @@ public class NetworkedClient : MonoBehaviour
                 case NetworkEventType.DataEvent:
                     string msg = Encoding.Unicode.GetString(recBuffer, 0, dataSize);
                     ProcessRecievedMsg(msg, recConnectionID);
-                    //Debug.Log("got msg = " + msg);
                     break;
                 case NetworkEventType.DisconnectEvent:
                     isConnected = false;
@@ -94,16 +93,13 @@ public class NetworkedClient : MonoBehaviour
         if (!isConnected)
         {
             Debug.Log("Attempting to create connection");
-
             NetworkTransport.Init();
-
             ConnectionConfig config = new ConnectionConfig();
             reliableChannelID = config.AddChannel(QosType.Reliable);
             unreliableChannelID = config.AddChannel(QosType.Unreliable);
             HostTopology topology = new HostTopology(config, maxConnections);
             hostID = NetworkTransport.AddHost(topology, 0);
             Debug.Log("Socket open.  Host ID = " + hostID);
-
             connectionID = NetworkTransport.Connect(hostID, "192.168.56.1", socketPort, 0, out error); // server is local on network
 
             if (error == 0)
@@ -154,92 +150,74 @@ public class NetworkedClient : MonoBehaviour
         if (signifier == ServerToClientMoveSignifiers.Pos1)
         {
             pos1update();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers.Pos2)
         {
             pos2update();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers.Pos3)
         {
             pos3update();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers.Pos4)
         {
             pos4update();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers.Pos5)
         {
             pos5update();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers.Pos6)
         {
             pos6update();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers.Pos7)
         {
             pos7update();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers.Pos8)
         {
             pos8update();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers.Pos9)
         {
             pos9update();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers2.Pos1)
         {
             pos1update2();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers2.Pos2)
         {
             pos2update2();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers2.Pos3)
         {
             pos3update2();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers2.Pos4)
         {
             pos4update2();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers2.Pos5)
         {
             pos5update2();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers2.Pos6)
         {
             pos6update2();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers2.Pos7)
         {
             pos7update2();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers2.Pos8)
         {
             pos8update2();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientMoveSignifiers2.Pos9)
         {
             pos9update2();
-            Debug.Log("sig recieve");
         }
         if (signifier == ServerToClientTurnSignifiers.IsMyTurn)
         {
@@ -353,47 +331,38 @@ public class NetworkedClient : MonoBehaviour
         if (Pos1.isOn && Pos1.interactable)
         {
             SendMessageToHost(ClientToServerMoveSignifiers.Pos1 + "," + "player is playing on pos1");
-            Debug.Log("Sig Sent");
         }
         if (Pos2.isOn && Pos2.interactable)
         {
             SendMessageToHost(ClientToServerMoveSignifiers.Pos2 + "," + "player is playing on pos1");
-            Debug.Log("Sig Sent");
         }
         if (Pos3.isOn && Pos3.interactable)
         {
             SendMessageToHost(ClientToServerMoveSignifiers.Pos3 + "," + "player is playing on pos1");
-            Debug.Log("Sig Sent");
         }
         if (Pos4.isOn && Pos4.interactable)
         {
             SendMessageToHost(ClientToServerMoveSignifiers.Pos4 + "," + "player is playing on pos1");
-            Debug.Log("Sig Sent");
         }
         if (Pos5.isOn && Pos5.interactable)
         {
             SendMessageToHost(ClientToServerMoveSignifiers.Pos5 + "," + "player is playing on pos1");
-            Debug.Log("Sig Sent");
         }
         if (Pos6.isOn && Pos6.interactable)
         {
             SendMessageToHost(ClientToServerMoveSignifiers.Pos6 + "," + "player is playing on pos1");
-            Debug.Log("Sig Sent");
         }
         if (Pos7.isOn && Pos7.interactable)
         {
             SendMessageToHost(ClientToServerMoveSignifiers.Pos7 + "," + "player is playing on pos1");
-            Debug.Log("Sig Sent");
         }
         if (Pos8.isOn && Pos8.interactable)
         {
             SendMessageToHost(ClientToServerMoveSignifiers.Pos8 + "," + "player is playing on pos1");
-            Debug.Log("Sig Sent");
         }
         if (Pos9.isOn && Pos9.interactable)
         {
             SendMessageToHost(ClientToServerMoveSignifiers.Pos9 + "," + "player is playing on pos1");
-            Debug.Log("Sig Sent");
         }
     }
 
